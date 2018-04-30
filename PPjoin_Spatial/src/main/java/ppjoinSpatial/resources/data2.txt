@@ -1,6 +1,3 @@
 Entry [value=LONDON, geometry=Point [x=9.0, y=15.0]]
-Entry [value=LONDON PARIS BERLIN DUBLIN PATRA SOFIA, geometry=Point [x=100.0, y=155.0]]
-Entry [value=XYZ, geometry=Point [x=60.0, y=50.0]]]
-Entry [value=ATHENS SOFIA VOLOS PATRA HERAKLION KARDITSA SPARTA ARTA KAVALA LARISA, geometry=Point [x=55.0, y=80.0]]
-Entry [value=LONDON BARCELONA DUBLIN, geometry=Point [x=12.0, y=4.0]]
-Entry [value=BARCELONA , geometry=Point [x=15.0, y=15.0]]
+Entry [value=BARCELONA, geometry=Point [x=15.0, y=15.0]]
+Entry [value=BARCELONA BERLIN, geometry=Point [x=20.0, y=20.0]]

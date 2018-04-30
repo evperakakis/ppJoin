@@ -40,16 +40,13 @@ public class PPJoin {
                     invIndexMap.get(token).add(orderedValueAndPos);
                 }
 
-
             }
-
 
         }
 
-        System.out.println("\n------------------------Inverted Index------------------------\n");
+        System.out.println("\n------------------------Inverted Index (of list2)------------------------\n");
 
         System.out.println(invIndexMap);
-
 
 
 
@@ -90,12 +87,13 @@ public class PPJoin {
                             int j = listOfEntryAndPos.get(k).getIIPos();
 
                             System.out.println("ngramII : " + ngramII);
-                            System.out.println("Entry : " + entryFromList2);
-                            System.out.println("Entry : " + entryFromList2.getOrderedValue() + "\n Pos: " + j);
+                            System.out.println("Entry From list2 : " + entryFromList2);
+                            System.out.println("Entry From list2 (Ordered) : " + entryFromList2.getOrderedValue() + "\n Pos: " + j);
                             System.out.println("\niFinal : " + iFinal);
 
-
-                            if (entryFromList2.getNgramsAndFreq().size() >= simThreshold * entryFromList1.getNgramsAndFreq().size()) {
+//                             SIZE FILTERING?????????
+//                            if (entryFromList2.getNgramsAndFreq().size() >= simThreshold * entryFromList1.getNgramsAndFreq().size()) {
+                            if (true) {
 
                                 //Calculating a and ubound as they are named in report
                                 double a = (simThreshold / (1 + simThreshold)) * (entryFromList1.getNgramsAndFreq().size() + entryFromList2.getNgramsAndFreq().size());
@@ -174,6 +172,11 @@ public class PPJoin {
 
             List<String> tokenSet1 =  new ArrayList<>();
             List<String> tokenSet2 =  new ArrayList<>();
+
+            System.out.println("entryFromList1.getNgramsAndFreq().size(): " + entryFromList1.getNgramsAndFreq().size());
+
+            System.out.println("entryFromOverlapMap.getNgramsAndFreq().size(): " + entryFromOverlapMap.getNgramsAndFreq().size());
+
 
             double a = (simThreshold / (1 + simThreshold)) * (entryFromList1.getNgramsAndFreq().size() + entryFromOverlapMap.getNgramsAndFreq().size());
 
@@ -271,7 +274,12 @@ public class PPJoin {
 
                         tokenSet1.retainAll(tokenSet2);
 
+                        System.out.println("tokenSet1 after retainALL: " + tokenSet1.toString());
+
                         intersection = tokenSet1.size();
+
+                        System.out.println("intersection: " + intersection);
+
 
                         valueO = valueO + intersection;
 
@@ -293,7 +301,7 @@ public class PPJoin {
 
                 }
 
-                System.out.println("\nHELLO FROM THE END OF VERIFY");
+                System.out.println("\nHELLO FROM THE END OF VERIFY\n");
 
 
             }
@@ -306,6 +314,8 @@ public class PPJoin {
 
 
         System.out.println(temporaryPairs);
+
+
 
 
     }

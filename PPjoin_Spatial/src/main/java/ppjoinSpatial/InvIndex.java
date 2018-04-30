@@ -22,7 +22,7 @@ public class InvIndex {
 
     @Override
     public String toString() {
-        return  "{ " + invIndexEntry + ", Position= " + invIndexPosition + "}" + "\n\n";
+        return  "{ " + invIndexEntry + "---> Ordered Entry: " + invIndexEntry.getOrderedValue() + ", Position= " + invIndexPosition + "}" + "\n\n";
     }
 
 
