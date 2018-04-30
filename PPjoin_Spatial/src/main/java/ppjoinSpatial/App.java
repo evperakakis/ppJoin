@@ -74,72 +74,8 @@ public class App {
         System.out.println("PPjoin Starting :");
 
 
-        double simThreshold = 0.50;
+        double simThreshold = 0.53;
         PPJoin.ppJoin(entryList1, entryList2, simThreshold);
-//
-//        Entry entryXDEL = entryList1.get(2);
-//        System.out.println(entryXDEL.getOrderedValue());
-//
-//        Entry entryYDEL = entryList2.get(2);
-//        System.out.println(entryYDEL.getOrderedValue());
-
-//
-//
-//        System.out.println("\n\n----------------------------------------------------------------------------------------------------------------");
-//        System.out.println("\n\n----------------------BRUTE FORCE----------------------\n\n");
-//
-//        List<String> tokenSet1 =  new ArrayList<>();
-//        List<String> tokenSet2 =  new ArrayList<>();
-//        List<String> tokenSetUnion =  new ArrayList<>();
-//        List<String> tokenSetIntersection =  new ArrayList<>();
-//
-//        System.out.println("List 1:");
-//        System.out.println(entryList1);
-//        System.out.println("------------------");
-//        System.out.println("List 2:");
-//        System.out.println(entryList2);
-//
-//        Entry entryFromList1 = entryList1.get(2);
-//        Entry entryFromList2 = entryList2.get(3);
-//
-//        for (int i=0; i<entryList1.get(2).getNgramsAndFreq().size(); i++) {
-//            tokenSet1.add(entryFromList1.getNgram(i));
-//            tokenSetIntersection.add(entryFromList1.getNgram(i));
-//        }
-//
-//        for (int i=0; i<entryList2.get(3).getNgramsAndFreq().size(); i++) {
-//            tokenSet2.add(entryFromList2.getNgram(i));
-//        }
-//        System.out.println("------------------");
-//        System.out.println(tokenSet1);
-//        System.out.println("------------------");
-//        System.out.println(tokenSet2);
-//
-//        tokenSetIntersection.retainAll(tokenSet2);
-//
-//        System.out.println("---------tokenSetIntersection---------");
-//        System.out.println(tokenSetIntersection);
-//
-//        tokenSetUnion.addAll(tokenSet1);
-//        tokenSetUnion.addAll(tokenSet2);
-//
-//
-//        tokenSetUnion = union(tokenSet1,tokenSet2);
-//
-//        System.out.println("---------tokenSetUnion---------");
-//        System.out.println(tokenSetUnion);
-//
-//        double interSize = tokenSetIntersection.size();
-//        System.out.println("\ninterSize: " + interSize);
-//
-//        double unionSize = tokenSet1.size() + tokenSet2.size() - interSize;
-//        System.out.println("\nunionSize: " + unionSize);
-//
-//
-//        double jacc = interSize/unionSize;
-//        System.out.println("jacc: " + jacc);
-
-
 
 
 
@@ -148,12 +84,12 @@ public class App {
 
     }
 
-    public static List<String> union(List<String> list1, List<String> list2) {
-        HashSet<String> set = new HashSet<String>();
-
-        set.addAll(list1);
-        set.addAll(list2);
-
-        return new ArrayList<String>(set);
-    }
+//    public static List<String> union(List<String> list1, List<String> list2) {
+//        HashSet<String> set = new HashSet<String>();
+//
+//        set.addAll(list1);
+//        set.addAll(list2);
+//
+//        return new ArrayList<String>(set);
+//    }
 }

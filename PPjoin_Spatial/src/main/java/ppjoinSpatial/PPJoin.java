@@ -23,7 +23,7 @@ public class PPJoin {
 
         for (Entry entryFromList2 : list2) {
 
-            prefixLength = Math.floor(entryFromList2.getNgramsAndFreq().size() - (simThreshold * entryFromList2.getNgramsAndFreq().size()) + 1);
+            prefixLength = Math.round(entryFromList2.getNgramsAndFreq().size() - (simThreshold * entryFromList2.getNgramsAndFreq().size()) + 1);
 
             for (i = 0; i < prefixLength; i++) {
 
@@ -52,7 +52,7 @@ public class PPJoin {
 
         for (Entry entryFromList1 : list1) {
 
-            prefixLength = Math.floor(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1);
+            prefixLength = Math.round(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1);
 
 //            prefixLength = Math.max(1,prefixLength); //prefix should be at least 1
 
@@ -162,7 +162,7 @@ public class PPJoin {
         System.out.println("\n------------------------VERIFY------------------------\n");
 
 
-        double prefixLengthX = Math.floor(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1);
+        double prefixLengthX = Math.round(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1);
 
 
         overlapMap.forEach((entryFromOverlapMap, overlap) -> {
@@ -185,9 +185,9 @@ public class PPJoin {
 
             if (overlap > 0) {
 
-                double prefixLengthY = Math.floor(entryFromOverlapMap.getNgramsAndFreq().size() - (simThreshold * entryFromOverlapMap.getNgramsAndFreq().size()) + 1);
+                double prefixLengthY = Math.round(entryFromOverlapMap.getNgramsAndFreq().size() - (simThreshold * entryFromOverlapMap.getNgramsAndFreq().size()) + 1);
 
-                System.out.println( "\n\n prefix length y: " + prefixLengthY + " || total length y: " + entryFromOverlapMap.getNgramsAndFreq().size() );
+                System.out.println( "\nprefix length y: " + prefixLengthY + " || total length y: " + entryFromOverlapMap.getNgramsAndFreq().size() +"\n" );
 
                 // wx and wy are last token of prefix as named in Verify
                 String wx = entryFromList1.getNgram( (int) prefixLengthX - 1);
