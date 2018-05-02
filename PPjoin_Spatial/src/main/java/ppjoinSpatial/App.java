@@ -74,7 +74,7 @@ public class App {
         System.out.println("PPjoin Starting :");
 
 
-        double simThreshold = 0.53;
+        double simThreshold = 0.60;
         PPJoin.ppJoin(entryList1, entryList2, simThreshold);
 
 
@@ -84,12 +84,4 @@ public class App {
 
     }
 
-//    public static List<String> union(List<String> list1, List<String> list2) {
-//        HashSet<String> set = new HashSet<String>();
-//
-//        set.addAll(list1);
-//        set.addAll(list2);
-//
-//        return new ArrayList<String>(set);
-//    }
 }

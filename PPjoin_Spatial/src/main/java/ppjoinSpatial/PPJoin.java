@@ -23,7 +23,12 @@ public class PPJoin {
 
         for (Entry entryFromList2 : list2) {
 
-            prefixLength = Math.round(entryFromList2.getNgramsAndFreq().size() - (simThreshold * entryFromList2.getNgramsAndFreq().size()) + 1);
+            prefixLength = Math.min(entryFromList2.getNgramsAndFreq().size(), Math.ceil(entryFromList2.getNgramsAndFreq().size() - (simThreshold * entryFromList2.getNgramsAndFreq().size()) + 1));
+
+            System.out.println("size y: " + entryFromList2.getNgramsAndFreq().size());
+
+            System.out.println("Prefix y: " + prefixLength);
+
 
             for (i = 0; i < prefixLength; i++) {
 
@@ -52,7 +57,7 @@ public class PPJoin {
 
         for (Entry entryFromList1 : list1) {
 
-            prefixLength = Math.round(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1);
+            prefixLength = Math.min(entryFromList1.getNgramsAndFreq().size(), Math.ceil(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1));
 
 //            prefixLength = Math.max(1,prefixLength); //prefix should be at least 1
 
@@ -92,8 +97,9 @@ public class PPJoin {
                             System.out.println("\niFinal : " + iFinal);
 
 //                             SIZE FILTERING?????????
-//                            if (entryFromList2.getNgramsAndFreq().size() >= simThreshold * entryFromList1.getNgramsAndFreq().size()) {
-                            if (true) {
+                            if (entryFromList2.getNgramsAndFreq().size() >= simThreshold * entryFromList1.getNgramsAndFreq().size()
+                                    || entryFromList1.getNgramsAndFreq().size() >= simThreshold * entryFromList2.getNgramsAndFreq().size()) {
+//                            if (true) {
 
                                 //Calculating a and ubound as they are named in report
                                 double a = (simThreshold / (1 + simThreshold)) * (entryFromList1.getNgramsAndFreq().size() + entryFromList2.getNgramsAndFreq().size());
@@ -162,7 +168,7 @@ public class PPJoin {
         System.out.println("\n------------------------VERIFY------------------------\n");
 
 
-        double prefixLengthX = Math.round(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1);
+        double prefixLengthX = Math.min(entryFromList1.getNgramsAndFreq().size(),Math.ceil(entryFromList1.getNgramsAndFreq().size() - (simThreshold * entryFromList1.getNgramsAndFreq().size()) + 1));
 
 
         overlapMap.forEach((entryFromOverlapMap, overlap) -> {
@@ -185,7 +191,7 @@ public class PPJoin {
 
             if (overlap > 0) {
 
-                double prefixLengthY = Math.round(entryFromOverlapMap.getNgramsAndFreq().size() - (simThreshold * entryFromOverlapMap.getNgramsAndFreq().size()) + 1);
+                double prefixLengthY = Math.min(entryFromOverlapMap.getNgramsAndFreq().size(), Math.ceil(entryFromOverlapMap.getNgramsAndFreq().size() - (simThreshold * entryFromOverlapMap.getNgramsAndFreq().size()) + 1));
 
                 System.out.println( "\nprefix length y: " + prefixLengthY + " || total length y: " + entryFromOverlapMap.getNgramsAndFreq().size() +"\n" );
 
@@ -193,10 +199,14 @@ public class PPJoin {
                 String wx = entryFromList1.getNgram( (int) prefixLengthX - 1);
                 int wxFreq = entryFromList1.getFrequency( (int) prefixLengthX - 1);
 
-
+                System.out.println("Entries:");
                 System.out.println(entryFromList1);
-
                 System.out.println(entryFromOverlapMap);
+
+                System.out.println("\n Ordered Entries:");
+                System.out.println(entryFromList1.getOrderedValue());
+                System.out.println(entryFromOverlapMap.getOrderedValue());
+
 
 
                 String wy = entryFromOverlapMap.getNgram( (int) prefixLengthY - 1);
@@ -213,9 +223,9 @@ public class PPJoin {
 
 
 
-                if (wxFreq < wyFreq) {
+                if (wxFreq <= wyFreq) {
 
-                    System.out.println("wxFreq < wyFreq");
+                    System.out.println("wxFreq <= wyFreq");
 
                     ubound = valueO + entryFromList1.getNgramsAndFreq().size() - prefixLengthX;
 
@@ -226,8 +236,6 @@ public class PPJoin {
 
                         for (int i = (int) prefixLengthX; i < entryFromList1.getNgramsAndFreq().size(); i++) {
 
-                            System.out.println(entryFromList1.getNgram(i));
-
                             tokenSet1.add(entryFromList1.getNgram(i));
                         }
 
@@ -236,15 +244,6 @@ public class PPJoin {
                             tokenSet2.add(entryFromOverlapMap.getNgram(i));
                         }
 
-                        System.out.println("tokenSet1: " + tokenSet1);
-                        System.out.println("tokenSet2: " + tokenSet2);
-
-                        tokenSet1.retainAll(tokenSet2);
-
-                        intersection = tokenSet1.size();
-
-                        valueO = valueO + intersection;
-
                     }
 
                 }
@@ -252,7 +251,7 @@ public class PPJoin {
 
                     ubound = valueO + entryFromOverlapMap.getNgramsAndFreq().size() - prefixLengthY;
 
-                    System.out.println("wxFreq >= wyFreq");
+                    System.out.println("wxFreq > wyFreq");
                     System.out.println("\nubound: " + (int) ubound + "\na: " + a + "\nvalueO: " +valueO);
 
 
@@ -268,27 +267,29 @@ public class PPJoin {
                             tokenSet2.add(entryFromOverlapMap.getNgram(i));
                         }
 
-                        System.out.println("tokenSet1: " + tokenSet1.toString());
-                        System.out.println("tokenSet2: " + tokenSet2.toString());
-
-
-                        tokenSet1.retainAll(tokenSet2);
-
-                        System.out.println("tokenSet1 after retainALL: " + tokenSet1.toString());
-
-                        intersection = tokenSet1.size();
-
-                        System.out.println("intersection: " + intersection);
-
-
-                        valueO = valueO + intersection;
-
                     }
 
                 }
 
+                System.out.println("tokenSet1: " + tokenSet1.toString());
+                System.out.println("tokenSet2: " + tokenSet2.toString());
+
+
+                tokenSet1.retainAll(tokenSet2);
+
+                System.out.println("tokenSet1 after retainALL: " + tokenSet1.toString());
+
+                intersection = tokenSet1.size();
+
+                System.out.println("intersection: " + intersection);
+
+
+                valueO = valueO + intersection;
 
                 System.out.println("\nFinal valueO: " + valueO);
+
+                System.out.println("Pairs if valueO >= a");
+
 
 
                 if (valueO >= a) {

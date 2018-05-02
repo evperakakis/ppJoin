@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class readFromDataFile {
 
@@ -59,12 +60,14 @@ public class readFromDataFile {
 
     }
 
-    public static ArrayList<Entry> readToNgrams(ArrayList<Entry> list, String filePath, int n) { // n for n-grams
+    public static ArrayList<Entry> readToNgrams(ArrayList<Entry> list, String filePath, int n) { // n for n-grams CURRENTLY WORKS ONLY FOR 3GRAMS
 
         String line; // This will reference one line at a time
         String toAddValue;
         String toAddX;
         String toAddY;
+        Character ngramMiddle;
+        Character emptySpace = ' ';
         ArrayList<String> ngrams = new ArrayList<>();
 
 
@@ -83,9 +86,19 @@ public class readFromDataFile {
                 toAddY = StringUtils.substringBetween(line, " y=", "]");
 
                 if (toAddValue != null) {          //IF IS NEEDED TO AVOID NULL VALUES
+
                     for (int i = 0; i < toAddValue.length() - n + 1; i++) {
-                        ngrams.add(toAddValue.substring(i, i + n));
+//
+//                        ngramMiddle = toAddValue.substring(i, i + n).charAt(1);
+//
+//                        System.out.println("ngramMiddle: " + ngramMiddle);
+
+                        if (!toAddValue.substring(i, i + n).contains(" ") && !toAddValue.substring(i, i + n).contains(".")
+                                && !toAddValue.substring(i, i + n).contains(",")) {
+                            ngrams.add(toAddValue.substring(i, i + n));
+                        }
                     }
+
                     list.add(new Entry(ngrams, Double.parseDouble(toAddX), Double.parseDouble(toAddY)));
                     ngrams.clear();
                 }

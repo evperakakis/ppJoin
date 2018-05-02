@@ -1,3 +1,9 @@
 Entry [value=LONDON, geometry=Point [x=100.0, y=100.0]]
 Entry [value=LONDON BARCELONA BERLIN, geometry=Point [x=14.0, y=44.0]]
 Entry [value=LONDON BARCELONA, geometry=Point [x=15.0, y=54.0]]
+Entry [value=LONDON ATHENS PARIS DUBLIN, geometry=Point [x=16.0, y=54.0]]
+Entry [value=SOFIA MOSCOW BELGRADE ZAGREB SARAJEVO ARAD, geometry=Point [x=180.0, y=160.0]]
+Entry [value=A very important fact to remember is that Java does not support multiple inheritance. This means that a class cannot extend more than one class. However, a class can implement one or more interfaces, which has helped Java get rid of the impossibility of multiple inheritance., geometry=Point [x=1.0, y=2.0]]
+
+
+
